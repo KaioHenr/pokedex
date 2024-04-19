@@ -1,0 +1,11 @@
+.pokeTabela {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.pokeCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
