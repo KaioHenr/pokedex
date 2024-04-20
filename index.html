@@ -9,22 +9,17 @@
         <link rel="stylesheet" href="css/pokeCard.css" />
     </head>
     <body>
+        <header>
+            <button>Buscador de pokemon</button>
+            <button>Comparador de pokemons</button>
+            <button>jogo da memoria de pokemon</button>
+        </header>
         <h1>Pokedex</h1>
         <input type="text" id="pokeBusca" />
+        <button id="buscarButton">buscar</button>
+        <button onclick="buscaPokeRandom()">me de um pokemon aleatirio</button>
         <div id="pokeTabela" class="pokeTabela"></div>
         <script src="js/jquery.js"></script>
-        <script src="js/gerador_card.js"></script>
+        <script type="module" src="js/preencheTabela.js"></script>
     </body>
 </html>
-<!-- <div class="pokeCard" id="">
-		<img
-			class="pokeImg"
-			src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1025.png"
-			alt=""
-		/>
-		<div class="pokeInfos">
-			<h3 class="pokeId">1</h3>
-			<h4 class="pokeNome">bulba</h4>
-			<h5 class="pokeTipo">PLANTA</h5>
-		</div>
-	</div> -->

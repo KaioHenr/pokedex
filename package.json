@@ -1,0 +1,12 @@
+{
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "Projeto realizado para o desafio da AEVO",
+  "main": "./js/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "kaio henrique",
+  "license": "ISC",
+  "type":"module"
+}
