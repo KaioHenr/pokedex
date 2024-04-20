@@ -66,4 +66,18 @@ export class Pokemon {
     set cadeia_evolutiva(nova_cadeia) {
         return (this.#cadeia_evolutiva = nova_cadeia);
     }
+    toJSON() {
+        return {
+            id: this.#id,
+            nome: this.#nome,
+            status: this.#status,
+            base_stats: this.#base_stats,
+            tipos: this.#tipos,
+            img: this.#img,
+            peso: this.#peso,
+            altura: this.#altura,
+            habilidades: this.#habilidades,
+            cadeiaEvolutiva:this.#cadeia_evolutiva
+        };
+    }
 }
