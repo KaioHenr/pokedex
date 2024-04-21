@@ -1,11 +1,11 @@
-import { Pokemon } from "./Pokemon.js";
 const tabela = document.getElementById("pokeTabela");
+carregaNomes();
+const pokeListaNomes = JSON.parse(localStorage.getItem("pokeNomeList"));
 
 async function carregaTabela(inicio, final) {
     for (let index = inicio; index < final; index++) {
         let pokeObj = await buscaInfo(index);
         await geraCard(pokeObj);
-        localStorage.setItem(pokeObj.id.toString(), JSON.stringify(pokeObj));
     }
     let ultimoPoke = tabela.lastChild;
     let vigiaPoke = new IntersectionObserver(([fimTabela], obervador) => {
@@ -15,35 +15,6 @@ async function carregaTabela(inicio, final) {
         }
     });
     vigiaPoke.observe(ultimoPoke);
-}
-
-async function buscaInfo(id) {
-    let pokeExiste = JSON.parse(localStorage.getItem(id)) ;
-    if(pokeExiste!= null){
-        return pokeExiste;
-    }else{
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: "https://pokeapi.co/api/v2/pokemon/" + id,
-                success: async function (result) {
-                    let pokeObj = new Pokemon(
-                        result.id,
-                        result.name,
-                        result.stats,
-                        result.types,
-                        result.sprites.front_default,
-                        result.weight,
-                        result.height,
-                        result.abilities
-                    );
-                    resolve(pokeObj);
-                },
-                error: function (error) {
-                    reject(error);
-                },
-            });
-        });
-    }
 }
 
 async function geraCard(pokemon) {
@@ -64,6 +35,15 @@ async function geraCard(pokemon) {
     pokeCard.setAttribute("class", "pokeCard");
     pokeCard.setAttribute("id", pokemon.id);
     pokeCard.setAttribute("href", "adcionar link aq");
+    pokeCard.addEventListener("click", function () {
+        $.get(
+            "./especificao_pokemon/index.php",
+            { idPoke: inputBusca },
+            function (result) {
+                console.log("oi");
+            }
+        );
+    });
 
     pokeImg.setAttribute("src", pokemon.img);
     pokeImg.setAttribute("class", "pokeImg");
@@ -77,6 +57,64 @@ async function geraCard(pokemon) {
 
     tabela.appendChild(pokeCard);
 }
-document.addEventListener("DOMContentLoaded", function () {
-    carregaTabela(1, 50);
+
+document.addEventListener("DOMContentLoaded", async function () {
+    await carregaTabela(1, 100);
+    let input = document.getElementById("pokeBusca");
+    input.addEventListener("input", async function () {
+        let value = input.value.trim().toLowerCase();
+        if (value != "" && value != null && isNaN(value)) {
+            let pokePromises = pokeListaNomes.map(async (lst) => {
+                if (lst.toLowerCase().includes(value)) {
+                    let aux = await buscaInfo(lst);
+                    return aux;
+                }
+            });
+            let pokeResults = await Promise.all(pokePromises);
+            pokeResults = pokeResults.filter(function (element) {
+                return element != undefined;
+            });
+            pokeResults.forEach((pokePesquisado) => {
+                if (!document.getElementById(pokePesquisado.id)) {
+                    geraCard(pokePesquisado);
+                }
+            });
+            Array.from(document.getElementsByClassName("pokeCard")).forEach(
+                (element) => {
+                    let id = parseInt(element.getAttribute("id"));
+                    if (!pokeResults.some((poke) => poke.id === id)) {
+                        element.style.display = "none";
+                    } else {
+                        element.style.display = "flex";
+                    }
+                }
+            );
+        } else if (value == "" || value == null) {
+            let pokeCards = document.getElementsByClassName("pokeCard");
+            Array.from(pokeCards).forEach((element) => {
+                element.style.display = "flex";
+            });
+        } else if (!isNaN(Number(value))) {
+            let id = parseInt(value);
+            try {
+                let pokeResult = await buscaInfo(id); // Aguarda a resolução da promessa
+                if (!document.getElementById(pokeResult.id)) {
+                    geraCard(pokeResult);
+                }
+                let pokeCard = document.getElementById(id.toString());
+                if (pokeCard) {
+                    pokeCard.style.display = "flex";
+                }
+                let pokeCards = document.getElementsByClassName("pokeCard");
+                Array.from(pokeCards).forEach((element) => {
+                    let cardId = parseInt(element.getAttribute("id"));
+                    if (cardId !== id) {
+                        element.style.display = "none";
+                    }
+                });
+            } catch (error) {
+                console.error("Erro ao buscar informações do Pokémon:", error);
+            }
+        }
+    });
 });

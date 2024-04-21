@@ -8,5 +8,8 @@
   },
   "author": "kaio henrique",
   "license": "ISC",
-  "type":"module"
+  "type": "module",
+  "dependencies": {
+    "php": "^1.0.2"
+  }
 }
