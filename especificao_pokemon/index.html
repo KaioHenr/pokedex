@@ -14,12 +14,13 @@
             <button onclick="window.location.href = '../index.html'">
                 Lista de pokemons de pokemon
             </button>
-            <button>Comparador de pokemons</button>
+            <button onclick="ComparaRecebe1()">Comparador de pokemons</button>
         </header>
         <div id="pokemon">
-            <a href="" id="pokeAnterior"
-                ><img src="" alt="" id="imgPokeAnt" />pokemon anterior</a
-            >
+            <a href="" id="pokeAnterior">
+                <img src="" alt="" id="imgPokeAnt" />
+                <img src="../img/setaEsquerda.svg" alt="" />
+            </a>
             <div id="infosPokemon">
                 <img src="" alt="pokemon" id="imgPokemon" />
                 <h1 id="nomePoke"></h1>
@@ -37,13 +38,15 @@
                 <div id="tiposPoke"><h1>Tipos:</h1></div>
                 <div id="habilidadesPoke"><h1>Habilidades:</h1></div>
             </div>
-            <a href="" id="pokeProximo"
-                ><img src="" alt="" id="imgPokeProx" />proximo pokemon</a
-            >
+            <a href="" id="pokeProximo">
+                <img src="" alt="" id="imgPokeProx" />
+                <img src="../img/setaDireita.svg" alt="" />
+            </a>
         </div>
 
         <script src="../js/jquery.js"></script>
-        <script src="../js/buscaInfo.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="../js/funções.js"></script>
         <script src="./js/pokeWiki.js"></script>
     </body>
 </html>

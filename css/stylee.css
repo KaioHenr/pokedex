@@ -1,8 +1,4 @@
 body {
   background-color: brown;
-  height: 100vh;
-}
-#pokeTabela {
-  display: flex;
-  background-color: aqua;
+  /* height: 100vh; */
 }

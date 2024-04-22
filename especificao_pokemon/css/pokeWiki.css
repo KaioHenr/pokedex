@@ -1,0 +1,18 @@
+#pokeAnterior {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+#pokeProximo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+#pokemon {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}

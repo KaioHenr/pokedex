@@ -27,18 +27,19 @@ async function geraCard(pokemon) {
     let pokeInfo = document.createElement("div");
     let pokeNome = document.createElement("h3");
     let pokeId = document.createElement("h4");
-    let pokeTipo = document.createElement("h5");
 
-    pokeInfo.appendChild(pokeNome);
     pokeInfo.appendChild(pokeId);
-    pokeInfo.appendChild(pokeTipo);
+    pokeInfo.appendChild(pokeNome);
 
     pokeCard.appendChild(pokeImg);
     pokeCard.appendChild(pokeInfo);
 
     pokeCard.setAttribute("class", "pokeCard");
     pokeCard.setAttribute("id", pokemon.id);
-    pokeCard.setAttribute("href", "./especificao_pokemon/index.html?idPoke=" + pokemon.id)
+    pokeCard.setAttribute(
+        "href",
+        "./especificao_pokemon/index.html?idPoke=" + pokemon.id
+    );
 
     pokeImg.setAttribute("src", pokemon.img);
     pokeImg.setAttribute("class", "pokeImg");
@@ -46,9 +47,6 @@ async function geraCard(pokemon) {
 
     pokeNome.innerHTML = pokemon.nome;
     pokeId.innerHTML = pokemon.id;
-    pokemon.tipos.forEach((tipo) => {
-        pokeTipo.innerHTML += tipo + " ";
-    });
 
     let pokeAnterior = document.getElementById(pokemon.id - 1);
     if (pokeAnterior != null) {
@@ -122,30 +120,3 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     });
 });
-
-function carregaNomes() {
-    let pokeNomeList = JSON.parse(localStorage.getItem("pokeNomeList"));
-    if (pokeNomeList != null) {
-        return pokeNomeList;
-    } else {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: "https://pokeapi.co/api/v2/pokemon/?limit=1025",
-                success: function (response) {
-                    let lstNames = [];
-                    for (
-                        let index = 0;
-                        index < response.results.length;
-                        index++
-                    ) {
-                        lstNames.push(response.results[index].name);
-                    }
-                    localStorage.setItem(
-                        "pokeNomeList",
-                        JSON.stringify(lstNames)
-                    );
-                },
-            });
-        });
-    }
-}

@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pokedex</title>
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/stylee.css" />
+        <link rel="stylesheet" href="css/pokeCard.css" />
+    </head>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Pokedex</title>
-    <link rel="stylesheet" href="css/reset.css" />
-    <link rel="stylesheet" href="css/stylee.css" />
-    <link rel="stylesheet" href="css/pokeCard.css" />
-</head>
+    <body>
+        <header>
+            <button onclick="window.location.href = './'">
+                Lista de pokemons de pokemon
+            </button>
+            <button onclick="comparaRecebe2()">Comparador de pokemons</button>
+        </header>
+        <h1>Pokedex</h1>
+        <input type="text" id="pokeBusca" />
+        <div id="pokeTabela" class="pokeTabela"></div>
 
-<body>
-    <header>
-        <button>Lista de pokemons de pokemon</button>
-        <button>Comparador de pokemons</button>
-    </header>
-    <h1>Pokedex</h1>
-    <input type="text" id="pokeBusca" />
-    <div id="pokeTabela" class="pokeTabela"></div>
-
-
-    <script src="./js/jquery.js"></script>
-    <script src="./js/buscaInfo.js"></script>
-    <script src="./js/preencheTabela.js"></script>
-</body>
-
+        <script src="./js/jquery.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="./js/funções.js"></script>
+        <script src="./js/preencheTabela.js"></script>
+    </body>
 </html>
