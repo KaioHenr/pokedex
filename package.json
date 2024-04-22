@@ -2,7 +2,7 @@
   "name": "pokedex",
   "version": "1.0.0",
   "description": "Projeto realizado para o desafio da AEVO",
-  "main": "./js/index.js",
+  "main": "./js/preencheTabela.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

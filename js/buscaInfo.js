@@ -35,10 +35,10 @@ async function buscaInfo(id) {
                         tipos: tipos,
                         habilidades: habilidades,
                     };
-                    localStorage.setItem(
-                        pokeObj.nome.toString(),
-                        JSON.stringify(pokeObj)
-                    );
+                    // localStorage.setItem(
+                    //     pokeObj.nome.toString(),
+                    //     JSON.stringify(pokeObj)
+                    // );
                     localStorage.setItem(
                         pokeObj.id.toString(),
                         JSON.stringify(pokeObj)
@@ -52,42 +52,3 @@ async function buscaInfo(id) {
         });
     }
 }
-
-function carregaNomes() {
-    let pokeNomeList = JSON.parse(localStorage.getItem("pokeNomeList"));
-    // if (pokeNomeList != null) {
-    if (false) {
-        return pokeNomeList;
-    } else {
-        return new Promise((resolve, reject) => {
-            $.ajax({
-                url: "https://pokeapi.co/api/v2/pokemon/?limit=1025",
-                success: function (response) {
-                    let lstNames = [];
-                    for (let index = 0; index < response.results.length; index++) {
-                        lstNames.push(response.results[index].name);
-                    }
-                    localStorage.setItem("pokeNomeList",JSON.stringify(lstNames));
-                }
-            });
-        });
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function () {
-    let buscarButton = document.getElementById("buscarButton");
-    buscarButton.addEventListener("click", (e) => {
-        let inputBusca = document.getElementById("pokeBusca").value;
-        if (inputBusca) {
-            $.get(
-                "./especificao_pokemon/index.php",
-                { idPoke: inputBusca },
-                function (result) {
-                    console.log("oi");
-                }
-            );
-        } else {
-            window.alert("deu ruim");
-        }
-    });
-});

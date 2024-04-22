@@ -1,9 +1,10 @@
 const tabela = document.getElementById("pokeTabela");
 carregaNomes();
 const pokeListaNomes = JSON.parse(localStorage.getItem("pokeNomeList"));
+let pokemonsAdicionados = new Set();
 
 async function carregaTabela(inicio, final) {
-    for (let index = inicio; index < final; index++) {
+    for (let index = inicio; index <= final; index++) {
         let pokeObj = await buscaInfo(index);
         await geraCard(pokeObj);
     }
@@ -18,6 +19,9 @@ async function carregaTabela(inicio, final) {
 }
 
 async function geraCard(pokemon) {
+    if (pokemonsAdicionados.has(pokemon.id)) {
+        return;
+    }
     let pokeCard = document.createElement("a");
     let pokeImg = document.createElement("img");
     let pokeInfo = document.createElement("div");
@@ -34,16 +38,7 @@ async function geraCard(pokemon) {
 
     pokeCard.setAttribute("class", "pokeCard");
     pokeCard.setAttribute("id", pokemon.id);
-    pokeCard.setAttribute("href", "adcionar link aq");
-    pokeCard.addEventListener("click", function () {
-        $.get(
-            "./especificao_pokemon/index.php",
-            { idPoke: inputBusca },
-            function (result) {
-                console.log("oi");
-            }
-        );
-    });
+    pokeCard.setAttribute("href", "./especificao_pokemon/index.html?idPoke=" + pokemon.id)
 
     pokeImg.setAttribute("src", pokemon.img);
     pokeImg.setAttribute("class", "pokeImg");
@@ -55,11 +50,20 @@ async function geraCard(pokemon) {
         pokeTipo.innerHTML += tipo + " ";
     });
 
-    tabela.appendChild(pokeCard);
+    let pokeAnterior = document.getElementById(pokemon.id - 1);
+    if (pokeAnterior != null) {
+        pokeAnterior.parentElement.insertBefore(
+            pokeCard,
+            pokeAnterior.nextSibling
+        );
+    } else {
+        tabela.appendChild(pokeCard);
+    }
+    pokemonsAdicionados.add(pokemon.id);
 }
 
 document.addEventListener("DOMContentLoaded", async function () {
-    await carregaTabela(1, 100);
+    await carregaTabela(1, 25);
     let input = document.getElementById("pokeBusca");
     input.addEventListener("input", async function () {
         let value = input.value.trim().toLowerCase();
@@ -118,3 +122,30 @@ document.addEventListener("DOMContentLoaded", async function () {
         }
     });
 });
+
+function carregaNomes() {
+    let pokeNomeList = JSON.parse(localStorage.getItem("pokeNomeList"));
+    if (pokeNomeList != null) {
+        return pokeNomeList;
+    } else {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: "https://pokeapi.co/api/v2/pokemon/?limit=1025",
+                success: function (response) {
+                    let lstNames = [];
+                    for (
+                        let index = 0;
+                        index < response.results.length;
+                        index++
+                    ) {
+                        lstNames.push(response.results[index].name);
+                    }
+                    localStorage.setItem(
+                        "pokeNomeList",
+                        JSON.stringify(lstNames)
+                    );
+                },
+            });
+        });
+    }
+}
