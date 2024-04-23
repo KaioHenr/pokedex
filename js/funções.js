@@ -127,7 +127,7 @@ async function ComparaRecebe1() {
 async function comparaRecebe2() {
     await Swal.fire({
         title: "Selecione os Pokémon para comparar",
-        icon: "info",
+        icon: "question",
         input: "select",
         inputPlaceholder: "Selecione o primeiro Pokémon",
         inputOptions: pokeListaNomes,
@@ -145,6 +145,10 @@ async function comparaRecebe2() {
             );
             await Swal.fire({
                 title: "Selecione o segundo Pokémon",
+                html:
+                    "<div style='display: flex; justify-content: space-around; align-items: center;'><img src='" +
+                    primeiroPokemon.img +
+                    "'/> <img src='../img/vs.svg'/> <img src='../img/interrogacao.svg' style='width: 100px;'/></div>",
                 input: "select",
                 inputPlaceholder: "Selecione o segundo Pokémon",
                 inputOptions: pokeListaNomes,

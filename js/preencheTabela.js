@@ -2,6 +2,26 @@ const tabela = document.getElementById("pokeTabela");
 carregaNomes();
 const pokeListaNomes = JSON.parse(localStorage.getItem("pokeNomeList"));
 let pokemonsAdicionados = new Set();
+const colors = {
+    normal: "#a8a77a",
+    fire: "#ee8130",
+    water: "#6390f0",
+    electric: "#f7d02c",
+    grass: "#7ac74c",
+    ice: "#96d9d6",
+    fighting: "#c22e28",
+    poison: "#a33ea1",
+    ground: "#e2bf65",
+    flying: "#a98ff3",
+    psychic: "#f95587",
+    bug: "#a6b91a",
+    rock: "#b6a136",
+    ghost: "#735797",
+    dragon: "#6f35fc",
+    dark: "#705746",
+    steel: "#b7b7ce",
+    fairy: "#d685ad"
+};
 
 async function carregaTabela(inicio, final) {
     for (let index = inicio; index <= final; index++) {
@@ -23,30 +43,36 @@ async function geraCard(pokemon) {
         return;
     }
     let pokeCard = document.createElement("a");
-    let pokeImg = document.createElement("img");
-    let pokeInfo = document.createElement("div");
-    let pokeNome = document.createElement("h3");
     let pokeId = document.createElement("h4");
+    let pokeImg = document.createElement("img");
+    let pokeNome = document.createElement("h3");
 
-    pokeInfo.appendChild(pokeId);
-    pokeInfo.appendChild(pokeNome);
-
+    pokeCard.appendChild(pokeId);
     pokeCard.appendChild(pokeImg);
-    pokeCard.appendChild(pokeInfo);
+    pokeCard.appendChild(pokeNome);
+
 
     pokeCard.setAttribute("class", "pokeCard");
     pokeCard.setAttribute("id", pokemon.id);
     pokeCard.setAttribute(
         "href",
-        "./especificao_pokemon/index.html?idPoke=" + pokemon.id
+        "especificao_pokemon/index.html?idPoke=" + pokemon.id
     );
+    if (pokemon.tipos.length == 2) {
+        pokeCard.style.background = `linear-gradient(to bottom right, ${colors[pokemon.tipos[0]]}, ${colors[pokemon.tipos[1]]})`;
+    } else {
+        pokeCard.style.backgroundColor = colors[pokemon.tipos[0]];
+    }
 
     pokeImg.setAttribute("src", pokemon.img);
     pokeImg.setAttribute("class", "pokeImg");
     pokeImg.alt = pokemon.nome;
 
+    pokeNome.setAttribute("class", "pokeNome");
     pokeNome.innerHTML = pokemon.nome;
-    pokeId.innerHTML = pokemon.id;
+
+    pokeId.setAttribute("class", "pokeId");
+    pokeId.innerHTML = "#"+pokemon.id;
 
     let pokeAnterior = document.getElementById(pokemon.id - 1);
     if (pokeAnterior != null) {

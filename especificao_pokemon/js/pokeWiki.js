@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     let imgAntPoke = document.getElementById("imgPokeAnt");
     await buscaInfo(parseInt(idPoke) - 1)
         .then((pokeAnterior) => {
-            btnAntPoke.href = "./?idPoke=" + (parseInt(idPoke) - 1);
+            btnAntPoke.href = "?idPoke=" + (parseInt(idPoke) - 1);
             imgAntPoke.setAttribute("src", pokeAnterior.img);
         })
         .catch(() => {
@@ -66,7 +66,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     let imgProxPoke = document.getElementById("imgPokeProx");
     await buscaInfo(parseInt(idPoke) + 1)
         .then((pokeProximo) => {
-            btnProxPoke.href = "./?idPoke=" + (parseInt(idPoke) + 1);
+            btnProxPoke.href = "?idPoke=" + (parseInt(idPoke) + 1);
             imgProxPoke.setAttribute("src", pokeProximo.img);
         })
         .catch(() => {
