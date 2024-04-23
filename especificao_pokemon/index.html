@@ -4,7 +4,7 @@
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Especificação do pokemon</title>
-        <link rel="icon" href="../img/pokebola.svg" type="image/svg">
+        <link rel="icon" href="../img/pokebola.svg" type="image/svg" />
         <link rel="stylesheet" href="../css/reset.css" />
         <link rel="stylesheet" href="../css/stylee.css" />
         <link rel="stylesheet" href="css/pokeWiki.css" />
@@ -18,15 +18,29 @@
             <button onclick="ComparaRecebe1()">Comparador de pokemons</button>
         </header>
         <div id="pokemon">
-            <a href="" id="pokeAnterior">
-                <img src="" alt="" id="imgPokeAnt" />
+            <a href="" id="pokeAnterior" class="setaPoke">
                 <img src="../img/setaEsquerda.svg" alt="" />
+                <img src="" alt="" id="imgPokeAnt" />
             </a>
             <div id="infosPokemon">
-                <img src="" alt="pokemon" id="imgPokemon" />
-                <h1 id="nomePoke"></h1>
-                <h1 id="alturaPoke"></h1>
-                <h1 id="pesoPoke"></h1>
+                <div id="imgName">
+                    <img src="" alt="pokemon" id="imgPokemon" />
+                    <h1 id="nomePoke"></h1>
+                </div>
+                <div id="textBox2">
+                    <div id="medidasPoke">
+                        <h1 id="alturaPoke"></h1>
+                        <h1 id="pesoPoke"></h1>
+                    </div>
+                    <div id="tiposBox">
+                        <h1 style="font-weight: bold;">Tipos:</h1>
+                        <div id="tiposPoke">
+                        </div>
+                    </div>
+                    <div id="habilidadesPoke">
+                        <h1 style="font-weight: bold;">Habilidades:</h1>
+                    </div>
+                </div>
                 <div id="status">
                     <h1 id="ataque"></h1>
                     <h1 id="defesa"></h1>
@@ -36,12 +50,10 @@
                     <h1 id="velocidade"></h1>
                     <h1 id="base_stats"></h1>
                 </div>
-                <div id="tiposPoke"><h1>Tipos:</h1></div>
-                <div id="habilidadesPoke"><h1>Habilidades:</h1></div>
             </div>
-            <a href="" id="pokeProximo">
-                <img src="" alt="" id="imgPokeProx" />
+            <a href="" id="pokeProximo" class="setaPoke">
                 <img src="../img/setaDireita.svg" alt="" />
+                <img src="" alt="" id="imgPokeProx" />
             </a>
         </div>
 

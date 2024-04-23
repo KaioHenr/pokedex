@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", async function () {
         } else if (!isNaN(Number(value))) {
             let id = parseInt(value);
             try {
-                let pokeResult = await buscaInfo(id); // Aguarda a resolução da promessa
+                let pokeResult = await buscaInfo(id);
                 if (!document.getElementById(pokeResult.id)) {
                     geraCard(pokeResult);
                 }
