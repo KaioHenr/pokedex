@@ -111,7 +111,7 @@ async function compararPokemon(pokemon1, pokemon2) {
             title: "Você escolheu o mesmo Pokémon!!!",
             html: `
                 <div style="display: flex; justify-content: space-around; align-items: center;">
-                    <img src="${pokemon1.img}" style="width: 150px;"/>
+                    <img src="${toNormalizedName(pokemon1.img)}" style="width: 150px;"/>
                     <img src="img/vs.svg" style="width: 100px;"/>
                     <div style="display: flex; justify-content: space-around; align-items: center;">
                         <img src="${pokemon2.img}" style="width: 150px;"/>
@@ -127,15 +127,15 @@ async function compararPokemon(pokemon1, pokemon2) {
                         <div style="display: flex;gap: 20px;">
                             <div>
                                 <img src="${pokemon1.img}" alt="" style="width: 150px;"/>
-                                <h1>O Pokémon ${pokemon1.nome} tem ${pokemon1.base_stats}!!
+                                <h1>${toNormalizedName(pokemon1.nome)} tem ${pokemon1.base_stats}
                             </div>
                             <img src="img/maior-que.svg" alt="sinal" style="width: 100px;"/>
                             <div>
                                 <img src="${pokemon2.img}" alt="" style="width: 150px;"/>
-                                <h1>O Pokémon ${pokemon2.nome} tem ${pokemon2.base_stats}!!
+                                <h1>${toNormalizedName(pokemon2.nome)} tem ${pokemon2.base_stats}
                             </div>
                         </div>
-                        <h1>O ${pokemon1.nome} tem ${Math.abs(pokemon1.base_stats - pokemon2.base_stats)} pontos de status a mais!!</h1>
+                        <h1>${toNormalizedName(pokemon1.nome)} tem ${Math.abs(pokemon1.base_stats - pokemon2.base_stats)} pontos de status a mais!</h1>
                     </div>`;
     } else if (pokemon1.base_stats === pokemon2.base_stats) {
         titulo = `${pokemon1.nome} tem a mesma quantidade de status que ${pokemon2.nome}`;
@@ -149,21 +149,21 @@ async function compararPokemon(pokemon1, pokemon2) {
                         <h1>Estes Pokémons tem ${pokemon1.base_stats}💪💪</h1>
                     </div>`;
     } else {
-        titulo = `${pokemon2.nome} é mais forte 💪💪`;
+        titulo = `${toNormalizedName(pokemon2.nome)} é mais forte 💪💪`;
         mensagem = `
                     <div style="display: flex; justify-content: center;flex-direction: column;">
                         <div style="display: flex;gap: 20px;">
                             <div>
                                 <img src="${pokemon2.img}" alt="" style="width: 150px;"/>
-                                <h1>O Pokémon ${pokemon2.nome} tem ${pokemon2.base_stats}!!
+                                <h1>${toNormalizedName(pokemon2.nome)} tem ${pokemon2.base_stats}
                             </div>
                             <img src="img/maior-que.svg" alt="sinal" style="width: 100px;"/>
                             <div>
                                 <img src="${pokemon1.img}" alt="" style="width: 150px;"/>
-                                <h1>O Pokémon ${pokemon1.nome} tem ${pokemon1.base_stats}!!
+                                <h1>${toNormalizedName(pokemon1.nome)} tem ${pokemon1.base_stats}
                             </div>
                         </div>
-                        <h1>O ${pokemon2.nome} tem ${Math.abs(pokemon1.base_stats - pokemon2.base_stats)} pontos de status a mais!!</h1>
+                        <h1>O ${toNormalizedName(pokemon2.nome)} tem ${Math.abs(pokemon1.base_stats - pokemon2.base_stats)} pontos de status a mais!</h1>
                     </div>`;
     }
     Swal.fire({
@@ -174,10 +174,11 @@ async function compararPokemon(pokemon1, pokemon2) {
 
 async function ComparaRecebe1() {
     let pokeNomeList = await carregaNomes();
+    let pokeNomeListNormal = pokeNomeList.map(e=> toNormalizedName(e));
     let idPoke = new URL(window.location.href).searchParams.get("idPoke");
     let pokePesquisado = await buscaInfo(parseInt(idPoke));
     await Swal.fire({
-        title: `Selecione o Pokémon para comparar com ${pokePesquisado.nome}`,
+        title: `Selecione o Pokémon para comparar com ${toNormalizedName(pokePesquisado.nome)}`,
         html: `
             <div style="display: flex; justify-content: space-around; align-items: center;">
                 <img src="${pokePesquisado.img}"/>
@@ -185,7 +186,7 @@ async function ComparaRecebe1() {
                 <img src="img/interrogacao.svg" style="width: 100px;"/>
             </div>`,
         input: "select",
-        inputOptions: pokeNomeList,
+        inputOptions: pokeNomeListNormal,
         inputPlaceholder: "Selecione o Pokémon",
         showCancelButton: true,
     }).then(async (nomeComparacao) => {
@@ -198,6 +199,7 @@ async function ComparaRecebe1() {
 
 async function comparaRecebe2() {
     let pokeNomeList = await carregaNomes();
+    let pokeNomeListNormal = pokeNomeList.map(e=> toNormalizedName(e));
     let pokemon1;
     let pokemon2;
     await Swal.fire({
@@ -205,7 +207,7 @@ async function comparaRecebe2() {
         icon: "question",
         input: "select",
         inputPlaceholder: "Selecione o primeiro Pokémon",
-        inputOptions: pokeNomeList,
+        inputOptions: pokeNomeListNormal,
         inputAttributes: {
             autocapitalize: "off",
         },
