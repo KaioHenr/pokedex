@@ -9,33 +9,31 @@ document.addEventListener("DOMContentLoaded", async function () {
     pokeNome.innerHTML = toTitleCase(pokePesquisado.nome);
 
     const pokeAltura = document.getElementById("alturaPoke");
-    pokeAltura.innerHTML = pokePesquisado.altura / 10 + " M";
+    pokeAltura.innerHTML = `${pokePesquisado.altura / 10} M`;
 
     const pokePeso = document.getElementById("pesoPoke");
-    pokePeso.innerHTML = pokePesquisado.peso / 10 + " Kg";
+    pokePeso.innerHTML = `${pokePesquisado.peso / 10} Kg`;
 
     const pokeAtaque = document.getElementById("ataque");
-    pokeAtaque.innerHTML = "Ataque: " + pokePesquisado.status.attack;
-
+    pokeAtaque.innerHTML = `Ataque: ${pokePesquisado.status.attack}`;
+    
     const pokeDefesa = document.getElementById("defesa");
-    pokeDefesa.innerHTML = "Defesa: " + pokePesquisado.status.defense;
-
+    pokeDefesa.innerHTML = `Defesa: ${pokePesquisado.status.defense}`;
+    
     const pokeVida = document.getElementById("vida");
-    pokeVida.innerHTML = "Vida: " + pokePesquisado.status.hp;
+    pokeVida.innerHTML = `Vida: ${pokePesquisado.status.hp}`;
 
     const pokeAtaqueEspecial = document.getElementById("ataqueEspecial");
-    pokeAtaqueEspecial.innerHTML =
-        "Ataque Especial: " + pokePesquisado.status["special-attack"];
+    pokeAtaqueEspecial.innerHTML =`Ataque Especial: ${pokePesquisado.status["special-attack"]}`;
 
     const pokeDefesaEspecial = document.getElementById("defesaEspecial");
-    pokeDefesaEspecial.innerHTML =
-        "Defesa Especial: " + pokePesquisado.status["special-defense"];
+    pokeDefesaEspecial.innerHTML =`Defesa Especial: ${pokePesquisado.status["special-defense"]}`;
 
     const pokeVelocidade = document.getElementById("velocidade");
-    pokeVelocidade.innerHTML = "Velocidade: " + pokePesquisado.status.speed;
+    pokeVelocidade.innerHTML =`Velocidade: ${pokePesquisado.status.speed}`;
 
     const pokeBaseStats = document.getElementById("base_stats");
-    pokeBaseStats.innerHTML = "Status total: " + pokePesquisado.base_stats;
+    pokeBaseStats.innerHTML =`Status total: ${pokePesquisado.base_stats}`;
 
     const pokeTipos = document.getElementById("tiposPoke");
     pokePesquisado.tipos.forEach((tipo) => {

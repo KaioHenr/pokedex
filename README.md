@@ -34,7 +34,3 @@ Este código é um aplicativo web que consome a API dos Pokémons para criar uma
    - Gera um card para um Pokémon e o adiciona à tabela na página.
    - O card contém o nome, o número (ID) e a imagem do Pokémon.
    - Estilizado com o tipo de Pokémon como fundo, utilizando as cores definidas no objeto `colors`.
-
-6. **Evento `DOMContentLoaded`**
-   - Acionado quando o DOM (Document Object Model) da página é completamente carregado.
-   - Inicia a execução de várias operações para exibir as informações detalhadas de um Pokémon específico na página.

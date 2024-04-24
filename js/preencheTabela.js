@@ -3,8 +3,8 @@ let pokemonsAdicionados = new Set();
 document.addEventListener("DOMContentLoaded", async function () {
     await carregaTabela(1, 25);
     const pokeListaNomes = await carregaNomes();
-
     let input = document.getElementById("pokeBusca");
+
     input.addEventListener("input", async function () {
         let value = input.value.trim().toLowerCase();
         if (value != "" && value != null && isNaN(value)) {
@@ -93,10 +93,7 @@ async function geraCard(pokemon) {
 
     pokeCard.setAttribute("class", "pokeCard");
     pokeCard.setAttribute("id", pokemon.id);
-    pokeCard.setAttribute(
-        "href",
-        "especificao_pokemon.html?idPoke=" + pokemon.id
-    );
+    pokeCard.href = `especificao_pokemon.html?idPoke=${pokemon.id}`;
     if (pokemon.tipos.length == 2) {
         pokeCard.style.background = `linear-gradient(to bottom right, ${
             colors[pokemon.tipos[0]]
@@ -113,7 +110,7 @@ async function geraCard(pokemon) {
     pokeNome.innerHTML = toTitleCase(pokemon.nome);
 
     pokeId.setAttribute("class", "pokeId");
-    pokeId.innerHTML = "#" + pokemon.id;
+    pokeId.innerHTML = `#${pokemon.id}`;
 
     let pokeAnterior = document.getElementById(pokemon.id - 1);
     if (pokeAnterior != null) {

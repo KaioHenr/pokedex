@@ -125,17 +125,17 @@ async function compararPokemon(pokemon1, pokemon2) {
         mensagem = `
                     <div style="display: flex; justify-content: center;flex-direction: column;">
                         <div style="display: flex;gap: 20px;">
-                            <img src="${
-                                pokemon1.img
-                            }" alt="" style="width: 150px;"/>
+                            <div>
+                                <img src="${pokemon1.img}" alt="" style="width: 150px;"/>
+                                <h1>O Pokémon ${pokemon1.nome} tem ${pokemon1.base_stat}!!
+                            </div>
                             <img src="img/maior-que.svg" alt="sinal" style="width: 100px;"/>
-                            <img src="${
-                                pokemon2.img
-                            }" alt="" style="width: 150px;"/>
+                            <div>
+                                <img src="${pokemon2.img}" alt="" style="width: 150px;"/>
+                                <h1>O Pokémon ${pokemon2.nome} tem ${pokemon2.base_stat}!!
+                            </div>
                         </div>
-                        <h1>${Math.abs(
-                            pokemon1.base_stats - pokemon2.base_stats
-                        )} pontos de status a mais!!</h1>
+                        <h1>O ${pokemon2.nome} tem ${Math.abs(pokemon1.base_stats - pokemon2.base_stats)} pontos de status a mais!!</h1>
                     </div>`;
     } else if (pokemon1.base_stats === pokemon2.base_stats) {
         titulo = `${pokemon1.nome} tem a mesma quantidade de status que ${pokemon2.nome}`;
@@ -146,23 +146,24 @@ async function compararPokemon(pokemon1, pokemon2) {
                             <img src="img/igual.svg" alt="sinal" style="width: 100px;"/>
                             <img src="${pokemon2.img}" alt="" style="width: 150px;"/>
                         </div>
+                        <h1>Estes Pokémons tem ${pokemon1.base_stat}💪💪</h1>
                     </div>`;
     } else {
         titulo = `${pokemon2.nome} é mais forte 💪💪`;
         mensagem = `
                     <div style="display: flex; justify-content: center;flex-direction: column;">
                         <div style="display: flex;gap: 20px;">
-                            <img src="${
-                                pokemon2.img
-                            }" alt="" style="width: 150px;"/>
+                            <div>
+                                <img src="${pokemon2.img}" alt="" style="width: 150px;"/>
+                                <h1>O Pokémon ${pokemon2.nome} tem ${pokemon2.base_stat}!!
+                            </div>
                             <img src="img/maior-que.svg" alt="sinal" style="width: 100px;"/>
-                            <img src="${
-                                pokemon1.img
-                            }" alt="" style="width: 150px;"/>
+                            <div>
+                                <img src="${pokemon1.img}" alt="" style="width: 150px;"/>
+                                <h1>O Pokémon ${pokemon1.nome} tem ${pokemon1.base_stat}!!
+                            </div>
                         </div>
-                        <h1>${Math.abs(
-                            pokemon1.base_stats - pokemon2.base_stats
-                        )} pontos de status a mais!!</h1>
+                        <h1>O ${pokemon2.nome} tem ${Math.abs(pokemon1.base_stats - pokemon2.base_stats)} pontos de status a mais!!</h1>
                     </div>`;
     }
     Swal.fire({
