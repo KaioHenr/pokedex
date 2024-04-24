@@ -286,7 +286,7 @@ async function compararPokemon(pokemon1, pokemon2) {
 
     if (pokemon1.id === pokemon2.id) {
         return Swal.fire({
-            titulo: "Você escolheu o mesmo Pokémon!!!",
+            title: "Você escolheu o mesmo Pokémon!!!",
             html: `
                 <div style="display: flex; justify-content: space-around; align-items: center;">
                     <img src="${pokemon1.img}" style="width: 150px;"/>
@@ -300,12 +300,6 @@ async function compararPokemon(pokemon1, pokemon2) {
 
     if (pokemon1.base_stats > pokemon2.base_stats) {
         titulo = `${pokemon1.nome} é mais forte 💪💪`;
-    } else if (pokemon1.base_stats === pokemon2.base_stats) {
-        titulo = `${pokemon1.nome} tem a mesma quantidade de status que ${pokemon2.nome}`;
-    } else {
-        titulo = `${pokemon2.nome} é mais forte 💪💪`;
-    }
-    if (pokemon1.base_stats > pokemon2.base_stats) {
         mensagem = `
                     <div style="display: flex; justify-content: center;flex-direction: column;">
                         <div style="display: flex;gap: 20px;">
@@ -322,6 +316,7 @@ async function compararPokemon(pokemon1, pokemon2) {
                         )} pontos de status a mais!!</h1>
                     </div>`;
     } else if (pokemon1.base_stats === pokemon2.base_stats) {
+        titulo = `${pokemon1.nome} tem a mesma quantidade de status que ${pokemon2.nome}`;
         mensagem = `
                     <div style="display: flex; justify-content: center;flex-direction: column;">
                         <div style="display: flex;gap: 20px;">
@@ -331,6 +326,7 @@ async function compararPokemon(pokemon1, pokemon2) {
                         </div>
                     </div>`;
     } else {
+        titulo = `${pokemon2.nome} é mais forte 💪💪`;
         mensagem = `
                     <div style="display: flex; justify-content: center;flex-direction: column;">
                         <div style="display: flex;gap: 20px;">
@@ -347,7 +343,6 @@ async function compararPokemon(pokemon1, pokemon2) {
                         )} pontos de status a mais!!</h1>
                     </div>`;
     }
-
     Swal.fire({
         title: titulo,
         html: mensagem,
@@ -368,19 +363,20 @@ async function ComparaRecebe1() {
             </div>`,
         input: "select",
         inputOptions: pokeNomeList,
+        inputPlaceholder: "Selecione o Pokémon",
         showCancelButton: true,
     }).then(async (nomeComparacao) => {
-        if (nomeComparacao.isConfirmed) {
-            let PokeComparacao = await buscaInfo(nomeComparacao.value);
-            console.log(nomeComparacao);
-            await compararPokemon(pokePesquisado, PokeComparacao);
-        }
+        let PokeComparacao = await buscaInfo(
+            pokeNomeList[nomeComparacao.value]
+        );
+        await compararPokemon(pokePesquisado, PokeComparacao);
     });
 }
 
 async function comparaRecebe2() {
     let pokeNomeList = await carregaNomes();
-    console.log()
+    let pokemon1;
+    let pokemon2;
     await Swal.fire({
         title: "Selecione o primeiro Pokémon",
         icon: "question",
@@ -394,40 +390,32 @@ async function comparaRecebe2() {
         cancelButtonText: "Cancelar",
         confirmButtonText: "Próximo",
         allowOutsideClick: false,
-    })
-        .then(async (primeiroResult) => {
-            if (primeiroResult.isConfirmed) {
-                let pokemon1 = await buscaInfo(
-                    pokeNomeList[primeiroResult.value]
-                );
-                await Swal.fire({
-                    title: "Selecione o segundo Pokémon",
-                    html: `<div style="display: flex; justify-content: space-around; align-items: center;">
+    }).then(async (primeiroResult) => {
+        if (primeiroResult && primeiroResult.value !== undefined) {
+            pokemon1 = await buscaInfo(pokeNomeList[primeiroResult.value]);
+            await Swal.fire({
+                title: "Selecione o segundo Pokémon",
+                html: `<div style="display: flex; justify-content: space-around; align-items: center;">
                                 <img src="${pokemon1.img}" style = "width: 150px;"/>
                                 <img src="../img/vs.svg" style="width: 100px;"/>
                                 <img src="../img/interrogacao.svg" style="width: 100px;"/>
                             </div>`,
-                    input: "select",
-                    inputPlaceholder: "Selecione o segundo Pokémon",
-                    inputOptions: pokeNomeList,
-                    inputAttributes: {
-                        autocapitalize: "off",
-                    },
-                    showCancelButton: true,
-                    cancelButtonText: "Cancelar",
-                    confirmButtonText: "Comparar",
-                    allowOutsideClick: false,
-                });
-            }
-        })
-        .then(async (segundoResult) => {
-            if (segundoResult.isConfirmed) {
-                let SegundoPokemon = await buscaInfo(
-                    pokeNomeList[segundoResult.value]
-                );
+                input: "select",
+                inputPlaceholder: "Selecione o segundo Pokémon",
+                inputOptions: pokeNomeList,
+                inputAttributes: {
+                    autocapitalize: "off",
+                },
+                showCancelButton: true,
+                cancelButtonText: "Cancelar",
+                confirmButtonText: "Comparar",
+                allowOutsideClick: false,
+            }).then(async (segundoResult) => {
+                pokemon2 = await buscaInfo(pokeNomeList[segundoResult.value]);
                 await compararPokemon(pokemon1, pokemon2);
-            }
-        });
+            });
+        }
+    });
 }
 
 function toTitleCase(str) {
