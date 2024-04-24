@@ -111,7 +111,7 @@ async function compararPokemon(pokemon1, pokemon2) {
             title: "Você escolheu o mesmo Pokémon!!!",
             html: `
                 <div style="display: flex; justify-content: space-around; align-items: center;">
-                    <img src="${toNormalizedName(pokemon1.img)}" style="width: 150px;"/>
+                    <img src="${pokemon1.img}" style="width: 150px;"/>
                     <img src="img/vs.svg" style="width: 100px;"/>
                     <div style="display: flex; justify-content: space-around; align-items: center;">
                         <img src="${pokemon2.img}" style="width: 150px;"/>
@@ -121,7 +121,7 @@ async function compararPokemon(pokemon1, pokemon2) {
     }
 
     if (pokemon1.base_stats > pokemon2.base_stats) {
-        titulo = `${pokemon1.nome} é mais forte 💪💪`;
+        titulo = `${toNormalizedName(pokemon1.nome)} é mais forte 💪💪`;
         mensagem = `
                     <div style="display: flex; justify-content: center;flex-direction: column;">
                         <div style="display: flex;gap: 20px;">
@@ -138,7 +138,7 @@ async function compararPokemon(pokemon1, pokemon2) {
                         <h1>${toNormalizedName(pokemon1.nome)} tem ${Math.abs(pokemon1.base_stats - pokemon2.base_stats)} pontos de status a mais!</h1>
                     </div>`;
     } else if (pokemon1.base_stats === pokemon2.base_stats) {
-        titulo = `${pokemon1.nome} tem a mesma quantidade de status que ${pokemon2.nome}`;
+        titulo = `${toNormalizedName(pokemon1.nome)} tem a mesma quantidade de status que ${toNormalizedName(pokemon2.nome)}`;
         mensagem = `
                     <div style="display: flex; justify-content: center;flex-direction: column;">
                         <div style="display: flex;gap: 20px;">
@@ -227,7 +227,7 @@ async function comparaRecebe2() {
                             </div>`,
                 input: "select",
                 inputPlaceholder: "Selecione o segundo Pokémon",
-                inputOptions: pokeNomeList,
+                inputOptions: pokeNomeListNormal,
                 inputAttributes: {
                     autocapitalize: "off",
                 },
