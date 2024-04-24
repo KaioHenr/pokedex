@@ -102,184 +102,6 @@ function carregaNomes() {
         });
     }
 }
-
-// async function ComparaRecebe1() {
-//     let pokeListaNomes = await carregaNomes();
-//     const idPoke = new URL(window.location.href).searchParams.get("idPoke");
-//     const pokePesquisado = await buscaInfo(parseInt(idPoke));
-
-//     await Swal.fire({
-//         title: "Selecione o Pokémon para comparar com o " + pokePesquisado.nome,
-//         html:"<div style='display: flex; justify-content: space-around; align-items: center;'><img src='" +
-//         pokePesquisado.img +
-//         "'/> <img src='../img/vs.svg'/> <img src='../img/interrogacao.svg' style='width: 100px;'/></div>",
-//         input: "select",
-//         inputOptions: pokeListaNomes,
-//         showCancelButton: true,
-//     }).then(async (segundoResult) => {
-//         let pokeSelecionado = await buscaInfo(
-//             pokeListaNomes[segundoResult.value]
-//         );
-//         if (pokePesquisado.id == pokeSelecionado.id) {
-//             Swal.fire({
-//                 title: "Você escolheu o mesmo Pokémon!!!",
-//                 html:
-//                     "<div style='display: flex; justify-content: space-around; align-items: center;'><img src='" +
-//                     pokePesquisado.img +
-//                     "'/> <img src='../img/vs.svg'/> <div style='display: flex; justify-content: space-around; align-items: center;'><img src='" +
-//                     pokeSelecionado.img +
-//                     "'/>",
-//             });
-//         } else if (pokePesquisado.base_stats > pokeSelecionado.base_stats) {
-//             Swal.fire({
-//                 title: pokePesquisado.nome + " e mais forte💪💪",
-//                 html:
-//                     "<div style='display: flex; justify-content: center;flex-direction: column;'><div style='display: flex;gap: 20px;'><img src='" +
-//                     pokePesquisado.img +
-//                     "' alt='' style = 'width: 150px;' /><img src='../img/maior-que.svg' alt='sinal' style = 'width: 100px;' /><img src='" +
-//                     pokeSelecionado.img +
-//                     "' alt='' style = 'width: 150px;' /></div><h1>" +
-//                     parseInt(
-//                         pokePesquisado.base_stats -
-//                         pokeSelecionado.base_stats
-//                     ) +
-//                     " pontos de status a mais!!</h1></div>",
-//             });
-//         } else if (pokePesquisado.base_stats == pokeSelecionado.base_stats) {
-//             Swal.fire({
-//                 title:
-//                 pokePesquisado.nome +
-//                     " tem a mesma quantidade de status que " +
-//                     pokeSelecionado.nome,
-//                 html:
-//                     "<div style='display: flex; justify-content: center;flex-direction: column;'><div style='display: flex;gap: 20px;'><img src='" +
-//                     pokePesquisado.img +
-//                     "' alt='' style = 'width: 150px;' /><img src='../img/igual.svg' alt='sinal' style = 'width: 100px;' /><img src='" +
-//                     pokeSelecionado.img +
-//                     "' alt='' style = 'width: 150px;' /></div></div>",
-//             });
-//         } else {
-//             Swal.fire({
-//                 title: pokeSelecionado.nome + " e mais forte💪💪",
-//                 html:
-//                     "<div style='display: flex; justify-content: center;flex-direction: column;'><div style='display: flex;gap: 20px;'><img src='" +
-//                     pokeSelecionado.img +
-//                     "' alt='' style = 'width: 150px;' /><img src='img/maior-que.svg' alt='sinal' style = 'width: 100px;' /><img src='" +
-//                     pokePesquisado.img +
-//                     "' alt='' style = 'width: 150px;' /></div><h1>" +
-//                     parseInt(
-//                         pokePesquisado.base_stats -
-//                         pokeSelecionado.base_stats
-//                     )*(-1) +
-//                     " pontos de status a mais!!</h1></div>",
-//             });
-//         }
-//     });
-// }
-// async function comparaRecebe2() {
-//     await Swal.fire({
-//         title: "Selecione os Pokémon para comparar",
-//         icon: "question",
-//         input: "select",
-//         inputPlaceholder: "Selecione o primeiro Pokémon",
-//         inputOptions: pokeListaNomes,
-//         inputAttributes: {
-//             autocapitalize: "off",
-//         },
-//         showCancelButton: true,
-//         cancelButtonText: "Cancelar",
-//         confirmButtonText: "Próximo",
-//         allowOutsideClick: false,
-//     }).then(async (primeiroResult) => {
-//         if (primeiroResult.isConfirmed) {
-//             let primeiroPokemon = await buscaInfo(
-//                 pokeListaNomes[primeiroResult.value]
-//             );
-//             await Swal.fire({
-//                 title: "Selecione o segundo Pokémon",
-//                 html:
-//                     "<div style='display: flex; justify-content: space-around; align-items: center;'><img src='" +
-//                     primeiroPokemon.img +
-//                     "' style = 'width: 150px;'/> <img src='img/vs.svg' style = 'width: 100px;'/> <img src='img/interrogacao.svg' style = 'width: 100px;'/></div>",
-//                 input: "select",
-//                 inputPlaceholder: "Selecione o segundo Pokémon",
-//                 inputOptions: pokeListaNomes,
-//                 inputAttributes: {
-//                     autocapitalize: "off",
-//                 },
-//                 showCancelButton: true,
-//                 cancelButtonText: "Cancelar",
-//                 confirmButtonText: "Comparar",
-//                 allowOutsideClick: false,
-//             }).then(async (segundoResult) => {
-//                 if (segundoResult.isConfirmed) {
-//                     let segundoPokemon = await buscaInfo(
-//                         pokeListaNomes[segundoResult.value]
-//                     );
-//                     if (primeiroPokemon.id == segundoPokemon.id) {
-//                         Swal.fire({
-//                             title: "Você escolheu o mesmo Pokémon!!!",
-//                             html:
-//                                 "<div style='display: flex; justify-content: space-around; align-items: center;'><img src='" +
-//                                 primeiroPokemon.img +
-//                                 "' style = 'width: 150px;'/> <img src='img/vs.svg' style = 'width: 100px;'/> <div style='display: flex; justify-content: space-around; align-items: center;'><img src='" +
-//                                 segundoPokemon.img +
-//                                 "' style = 'width: 150px;'/>",
-//                         });
-//                     } else if (
-//                         primeiroPokemon.base_stats > segundoPokemon.base_stats
-//                     ) {
-//                         Swal.fire({
-//                             title: primeiroPokemon.nome + " e mais forte💪💪",
-//                             html:
-//                                 "<div style='display: flex; justify-content: center;flex-direction: column;'><div style='display: flex;gap: 20px;'><img src='" +
-//                                 primeiroPokemon.img +
-//                                 "' alt='' style = 'width: 150px;' /><img src='img/maior-que.svg' alt='sinal' style = 'width: 100px;' /><img src='" +
-//                                 segundoPokemon.img +
-//                                 "' alt='' style = 'width: 150px;' /></div><h1>" +
-//                                 parseInt(
-//                                     primeiroPokemon.base_stats -
-//                                         segundoPokemon.base_stats
-//                                 ) +
-//                                 " pontos de status a mais!!</h1></div>",
-//                         });
-//                     } else if (
-//                         primeiroPokemon.base_stats == segundoPokemon.base_stats
-//                     ) {
-//                         Swal.fire({
-//                             title:
-//                                 primeiroPokemon.nome +
-//                                 " tem a mesma quantidade de status que " +
-//                                 segundoPokemon.nome,
-//                             html:
-//                                 "<div style='display: flex; justify-content: center;flex-direction: column;'><div style='display: flex;gap: 20px;'><img src='" +
-//                                 segundoPokemon.img +
-//                                 "' alt='' style = 'width: 150px;' /><img src='img/igual.svg' alt='sinal' style = 'width: 100px;' /><img src='" +
-//                                 primeiroPokemon.img +
-//                                 "' alt='' style = 'width: 150px;' /></div></div>",
-//                         });
-//                     } else {
-//                         Swal.fire({
-//                             title: segundoPokemon.nome + " e mais forte💪💪",
-//                             html:
-//                                 "<div style='display: flex; justify-content: center;flex-direction: column;'><div style='display: flex;gap: 20px;'><img src='" +
-//                                 segundoPokemon.img +
-//                                 "' alt='' style = 'width: 150px;' /><img src='img/maior-que.svg' alt='sinal' style = 'width: 100px;' /><img src='" +
-//                                 primeiroPokemon.img +
-//                                 "' alt='' style = 'width: 150px;' /></div><h1>" +
-//                                 parseInt(
-//                                     primeiroPokemon.base_stats -
-//                                         segundoPokemon.base_stats
-//                                 ) *
-//                                     -1 +
-//                                 " pontos de status a mais!!</h1></div>",
-//                         });
-//                     }
-//                 }
-//             });
-//         }
-//     });
-// }
 async function compararPokemon(pokemon1, pokemon2) {
     let titulo;
     let mensagem;
@@ -290,7 +112,7 @@ async function compararPokemon(pokemon1, pokemon2) {
             html: `
                 <div style="display: flex; justify-content: space-around; align-items: center;">
                     <img src="${pokemon1.img}" style="width: 150px;"/>
-                    <img src="../img/vs.svg" style="width: 100px;"/>
+                    <img src="img/vs.svg" style="width: 100px;"/>
                     <div style="display: flex; justify-content: space-around; align-items: center;">
                         <img src="${pokemon2.img}" style="width: 150px;"/>
                     </div>
@@ -306,7 +128,7 @@ async function compararPokemon(pokemon1, pokemon2) {
                             <img src="${
                                 pokemon1.img
                             }" alt="" style="width: 150px;"/>
-                            <img src="../img/maior-que.svg" alt="sinal" style="width: 100px;"/>
+                            <img src="img/maior-que.svg" alt="sinal" style="width: 100px;"/>
                             <img src="${
                                 pokemon2.img
                             }" alt="" style="width: 150px;"/>
@@ -321,7 +143,7 @@ async function compararPokemon(pokemon1, pokemon2) {
                     <div style="display: flex; justify-content: center;flex-direction: column;">
                         <div style="display: flex;gap: 20px;">
                             <img src="${pokemon1.img}" alt="" style="width: 150px;"/>
-                            <img src="../img/igual.svg" alt="sinal" style="width: 100px;"/>
+                            <img src="img/igual.svg" alt="sinal" style="width: 100px;"/>
                             <img src="${pokemon2.img}" alt="" style="width: 150px;"/>
                         </div>
                     </div>`;
@@ -333,7 +155,7 @@ async function compararPokemon(pokemon1, pokemon2) {
                             <img src="${
                                 pokemon2.img
                             }" alt="" style="width: 150px;"/>
-                            <img src="../img/maior-que.svg" alt="sinal" style="width: 100px;"/>
+                            <img src="img/maior-que.svg" alt="sinal" style="width: 100px;"/>
                             <img src="${
                                 pokemon1.img
                             }" alt="" style="width: 150px;"/>
@@ -358,8 +180,8 @@ async function ComparaRecebe1() {
         html: `
             <div style="display: flex; justify-content: space-around; align-items: center;">
                 <img src="${pokePesquisado.img}"/>
-                <img src="../img/vs.svg"/>
-                <img src="../img/interrogacao.svg" style="width: 100px;"/>
+                <img src="img/vs.svg"/>
+                <img src="img/interrogacao.svg" style="width: 100px;"/>
             </div>`,
         input: "select",
         inputOptions: pokeNomeList,
@@ -397,8 +219,8 @@ async function comparaRecebe2() {
                 title: "Selecione o segundo Pokémon",
                 html: `<div style="display: flex; justify-content: space-around; align-items: center;">
                                 <img src="${pokemon1.img}" style = "width: 150px;"/>
-                                <img src="../img/vs.svg" style="width: 100px;"/>
-                                <img src="../img/interrogacao.svg" style="width: 100px;"/>
+                                <img src="img/vs.svg" style="width: 100px;"/>
+                                <img src="img/interrogacao.svg" style="width: 100px;"/>
                             </div>`,
                 input: "select",
                 inputPlaceholder: "Selecione o segundo Pokémon",
