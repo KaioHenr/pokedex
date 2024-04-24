@@ -107,7 +107,7 @@ async function geraCard(pokemon) {
     pokeImg.alt = pokemon.nome;
 
     pokeNome.setAttribute("class", "pokeNome");
-    pokeNome.innerHTML = toTitleCase(pokemon.nome);
+    pokeNome.innerHTML = toNormalizedName(pokemon.nome);
 
     pokeId.setAttribute("class", "pokeId");
     pokeId.innerHTML = `#${pokemon.id}`;

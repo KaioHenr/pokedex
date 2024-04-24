@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     pokeImg.setAttribute("src", pokePesquisado.img);
 
     const pokeNome = document.getElementById("nomePoke");
-    pokeNome.innerHTML = toTitleCase(pokePesquisado.nome);
+    pokeNome.innerHTML = toNormalizedName(pokePesquisado.nome);
 
     const pokeAltura = document.getElementById("alturaPoke");
     pokeAltura.innerHTML = `${pokePesquisado.altura / 10} M`;
@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const pokeTipos = document.getElementById("tiposPoke");
     pokePesquisado.tipos.forEach((tipo) => {
         let h1Tipo = document.createElement("h1");
-        h1Tipo.innerText = toTitleCase(tipo);
+        h1Tipo.innerText = toNormalizedName(tipo);
         h1Tipo.style.backgroundColor = colors[tipo];
         h1Tipo.setAttribute("class", "tipos");
         pokeTipos.appendChild(h1Tipo);
@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", async function () {
     const pokeHabilidade = document.getElementById("habilidadesPoke");
     pokePesquisado.habilidades.forEach((Habilidade) => {
         let h1Habilidade = document.createElement("h1");
-        h1Habilidade.innerText = toTitleCase(Habilidade);
+        h1Habilidade.innerText = toNormalizedName(Habilidade);
         pokeHabilidade.appendChild(h1Habilidade);
     });
 
